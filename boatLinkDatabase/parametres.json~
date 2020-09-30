@@ -1,0 +1,470 @@
+{
+  "tension_batterie": {
+    "no_param":101,
+    "size": 2,
+    "description": "Tension batterie",
+    "unite": "V",
+    "envoiC":1,
+    "envoiI":1,
+    "envoiD":0
+  },
+  "tension_boost": {
+    "no_param":102,
+    "size": 2,
+    "description": "Tension boost",
+    "unite": "V",
+   "envoiC":1,
+    "envoiI":1,
+    "envoiD":0
+  },
+  "courant_batterie": {
+    "no_param":103,
+    "size": 2,
+    "description": "Courant batterie",
+    "unite": "A",
+    "envoiC":1,
+    "envoiI":1,
+    "envoiD":0
+  },
+  "courant_max_moteur": {
+    "no_param":104,
+    "size": 2,
+    "description": "Courant max moteur",
+    "unite": "A",
+    "envoiC":1,
+    "envoiI":1,
+    "envoiD":1
+  },
+  "courant_moteur": {
+    "no_param":105,
+    "size": 2,
+    "description": "Courant moteur",
+    "unite": "A",
+    "envoiC":1,
+    "envoiI":1,
+    "envoiD":0
+  },  
+  "capacite_totale_batterie": {
+    "no_param":106,
+    "size": 2,
+    "description": "Capacité totale batterie",
+    "unite": "W",
+    "envoiC":1,
+    "envoiI":1,
+    "envoiD":0
+  },  
+  "capacite_dispo_batterie": {
+    "no_param":107,
+    "size": 2,
+    "description": "Capacité disponible batterie",
+    "unite": "W",
+    "envoiC":0,
+    "envoiI":1,
+    "envoiD":0
+  },  
+  "capacite_dispo_pourc": {
+    "no_param":108,
+    "size": 1,
+    "description": "Capacité disponible %",
+    "unite": "%",
+    "envoiC":1,
+    "envoiI":1,
+    "envoiD":0
+  },
+  "puissance_inst_moteur": {
+    "no_param":109,
+    "size": 2,
+    "description": "Puissance instantanée moteur",
+    "unite": "W",
+    "envoiC":1,
+    "envoiI":1,
+    "envoiD":0
+  }, 
+  "temps_course_possible": {
+    "no_param":121,
+    "size": 2,
+    "description": "Temps de course encore possible",
+    "unite": "s",
+    "envoiC":1,
+    "envoiI":1,
+    "envoiD":0
+  }, 
+  "type_course_ll": {
+    "no_param":122,
+    "size": 1,
+    "description": "Type de course LOURD - LEGER",
+    "unite": " ",
+    "envoiC":0,
+    "envoiI":0,
+    "envoiD":1
+  },
+  "type_course_qf": {
+    "no_param":123,
+    "size": 1,
+    "description": "Type de course qualif-1/4-1/2-finale",
+    "unite": " ",
+    "envoiC":0,
+    "envoiI":0,
+    "envoiD":1
+
+  },
+  "vitesse_bateau": {
+    "no_param":124,
+    "size": 2,
+    "description": "Vitesse bateau",
+    "unite": "km/h",
+    "envoiC":1,
+    "envoiI":1,
+    "envoiD":0
+  },  
+  "distance_parc_leger": {
+    "no_param":125,
+    "size": 2,
+    "description": "Distance parcours léger",
+    "unite": "m/km",
+    "envoiC":0,
+    "envoiI":1,
+    "envoiD":1
+  }, 
+  "distance_parc_lourd": {
+    "no_param":126,
+    "size": 2,
+    "description": "Distance parcours lourd",
+    "unite": "m/km",
+    "envoiC":0,
+    "envoiI":1,
+    "envoiD":1
+  },
+  "vitesse_min_calc_temps": {
+    "no_param":127,
+    "size": 2,
+    "description": "Vitesse minimale pour calcul du temps",
+    "unite": "m/s",
+    "envoiC":0,
+    "envoiI":1,
+    "envoiD":1
+  },  
+  "heure": {
+    "no_param":141,
+    "size": 1,
+    "description": "Heure",
+    "unite": " ",
+    "envoiC":1,
+    "envoiI":1,
+    "envoiD":0
+  },   
+  "minute": {
+    "no_param":142,
+    "size": 1,
+    "description": "Minute",
+    "unite": " ",
+    "envoiC":1,
+    "envoiI":1,
+    "envoiD":0
+  }, 
+   "seconde": {
+    "no_param":143,
+    "size": 1,
+    "description": "Seconde",
+    "unite": " ",
+    "envoiC":1,
+    "envoiI":1,
+    "envoiD":0
+  }, 
+  "jour": {
+    "no_param":144,
+    "size": 1,
+    "description": "Jour",
+    "unite": " ",
+    "envoiC":0,
+    "envoiI":1,
+    "envoiD":0
+  },   
+  "mois": {
+    "no_param":145,
+    "size": 1,
+    "description": "Mois",
+    "unite": " ",
+    "envoiC":0,
+    "envoiI":1,
+    "envoiD":0
+  }, 
+   "annee": {
+    "no_param":146,
+    "size": 1,
+    "description": "Année",
+    "unite": " ",
+    "envoiC":0,
+    "envoiI":1,
+    "envoiD":0
+  }, 
+   "erreur1": {
+    "no_param":151,
+    "size": 1,
+    "description": "Erreur 1",
+    "unite": " ",
+    "envoiC":1,
+    "envoiI":1,
+    "envoiD":0
+  }, 
+   "erreur2": {
+    "no_param":152,
+    "size": 1,
+    "description": "Erreur 2",
+    "unite": " ",
+    "envoiC":1,
+    "envoiI":1,
+    "envoiD":0
+  },  
+   "erreur3": {
+    "no_param":153,
+    "size": 1,
+    "description": "Erreur 3",
+    "unite": " ",
+    "envoiC":1,
+    "envoiI":1,
+    "envoiD":0
+  }, 
+   "erreur4": {
+    "no_param":154,
+    "size": 1,
+    "description": "Erreur 4",
+    "unite": " ",
+    "envoiC":1,
+    "envoiI":1,
+    "envoiD":0
+  },   
+   "erreur5": {
+    "no_param":155,
+    "size": 1,
+    "description": "Erreur 5",
+    "unite": " ",
+    "envoiC":1,
+    "envoiI":1,
+    "envoiD":0
+  },  	  
+   "emergency_stop": {
+    "no_param":161,
+    "size": 1,
+    "description": "Emergency STOP",
+    "unite": " ",
+    "envoiC":1,
+    "envoiI":1,
+    "envoiD":0
+  }, 
+   "mode_stop_on": {
+    "no_param":162,
+    "size": 1,
+    "description": "Mode STOP - ON",
+    "unite": " ",
+    "envoiC":1,
+    "envoiI":1,
+    "envoiD":0
+  },  
+   "consigne_gouv": {
+    "no_param":171,
+    "size": 2,
+    "description": "Consigne gouvernail",
+    "unite": " ",
+    "envoiC":0,
+    "envoiI":0,
+    "envoiD":0
+  }, 
+   "consigne_foils1": {
+    "no_param":172,
+    "size": 2,
+    "description": "Consigne foils 1",
+    "unite": "°",
+    "envoiC":0,
+    "envoiI":0,
+    "envoiD":1
+  }, 
+   "consigne_foils2": {
+    "no_param":173,
+    "size": 2,
+    "description": "Consigne foils 2",
+    "unite": "°",
+    "envoiC":0,
+    "envoiI":0,
+    "envoiD":1
+  },  
+   "consigne_capt_moteur1": {
+    "no_param":174,
+    "size": 4,
+    "description": "Consigne capteur moteur 1",
+    "unite": "°",
+    "envoiC":0,
+    "envoiI":0,
+    "envoiD":1
+  }, 
+   "consigne_capt_moteur2": {
+    "no_param":175,
+    "size": 4,
+    "description": "Consigne capteur moteur 2",
+    "unite": "°",
+    "envoiC":0,
+    "envoiI":0,
+    "envoiD":1
+  }, 
+   "consigne_vit_driver_moteur": {
+    "no_param":176,
+    "size": 2,
+    "description": "Consigne vitesse driver moteur",
+    "unite": "%",
+    "envoiC":0,
+    "envoiI":0,
+    "envoiD":0
+  }, 
+   "consigne_vit_telecommande": {
+    "no_param":177,
+    "size": 2,
+    "description": "Consigne vitesse télécommande",
+    "unite": "%",
+    "envoiC":0,
+    "envoiI":0,
+    "envoiD":0
+  },
+   "mode_man_course_end": {
+    "no_param":178,
+    "size": 1,
+    "description": "Mode manuel-course-endurance",
+    "unite": " ",
+    "envoiC":1,
+    "envoiI":1,
+    "envoiD":0
+  },
+   "mode_avant_stop_arr": {
+    "no_param":179,
+    "size": 1,
+    "description": "Mode marche avant - stop - arrière",
+    "unite": " ",
+    "envoiC":1,
+    "envoiI":1,
+    "envoiD":0
+  },
+   "pos_foils1": {
+    "no_param":191,
+    "size": 2,
+    "description": "Position foils 1",
+    "unite": "°",
+    "envoiC":0,
+    "envoiI":1,
+    "envoiD":0
+  },
+   "pos_foils2": {
+    "no_param":192,
+    "size": 2,
+    "description": "Position foils 2",
+    "unite": "°",
+    "envoiC":0,
+    "envoiI":1,
+    "envoiD":0
+  },
+   "pos_capteur_moteur1": {
+    "no_param":193,
+    "size": 4,
+    "description": "Position capteur moteur 1",
+    "unite": "°",
+    "envoiC":0,
+    "envoiI":1,
+    "envoiD":0
+  },
+   "pos_capteur_moteur2": {
+    "no_param":194,
+    "size": 4,
+    "description": "Position capteur moteur 2",
+    "unite": "°",
+    "envoiC":0,
+    "envoiI":1,
+    "envoiD":0
+  },
+   "accel_x": {
+    "no_param":195,
+    "size": 2,
+    "description": "Accéléromètre X",
+    "envoiC":1,
+    "envoiI":1,
+    "envoiD":0
+  },
+   "accel_y": {
+    "no_param":196,
+    "size": 2,
+    "description": "Accéléromètre Y",
+    "envoiC":1,
+    "envoiI":1,
+    "envoiD":0
+  },
+   "accel_z": {
+    "no_param":197,
+    "size": 2,
+    "description": "Accéléromètre Z",
+    "envoiC":1,
+    "envoiI":1,
+    "envoiD":0
+  },
+   "reg_P_gouvernail": {
+    "no_param":211,
+    "size": 2,
+    "description": "Régulateur P gouvernail",
+    "envoiC":0,
+    "envoiI":1,
+    "envoiD":1
+  },
+   "reg_I_gouvernail": {
+    "no_param":212,
+    "size": 2,
+    "description": "Régulateur I gouvernail",
+    "envoiC":0,
+    "envoiI":1,
+    "envoiD":1
+  },
+   "reg_P_foils1": {
+    "no_param":213,
+    "size": 2,
+    "description": "Régulateur P foils 1",
+    "envoiC":0,
+    "envoiI":1,
+    "envoiD":1
+  },
+   "reg_I_foils1": {
+    "no_param":214,
+    "size": 2,
+    "description": "Régulateur I foils 1",
+    "envoiC":0,
+    "envoiI":1,
+    "envoiD":1
+  },
+   "reg_P_foils2": {
+    "no_param":215,
+    "size": 2,
+    "description": "Régulateur P foils 2",
+    "envoiC":0,
+    "envoiI":1,
+    "envoiD":1
+  },
+   "reg_I_foils2": {
+    "no_param":216,
+    "size": 2,
+    "description": "Régulateur I foils 2",
+    "envoiC":0,
+    "envoiI":1,
+    "envoiD":1
+  },
+   "reg_P_cour_moteur": {
+    "no_param":217,
+    "size": 2,
+    "description": "Régulateur P courant moteur",
+    "envoiC":0,
+    "envoiI":1,
+    "envoiD":1
+  },
+   "reg_I_cour_moteur": {
+    "no_param":218,
+    "size": 2,
+    "description": "Régulateur I courant moteur",
+    "envoiC":0,
+    "envoiI":1,
+    "envoiD":1
+  }
+}
+

@@ -1,0 +1,356 @@
+// Gestion de l'énergie
+
+{
+// Gestion de l'énergie
+
+  "tension_batterie": {
+    "size": 2,
+    "description": "Tension batterie",
+    "envoiC": "1",
+    "envoiI": "1",
+    "envoiD": "0"
+  },
+  "tension_boost": {
+    "size": 2,
+    "description": "Tension boost",
+    "envoiC": "1",
+    "envoiI": "1",
+    "envoiD": "0"
+  },
+  "courant_batterie": {
+    "size": 2,
+    "description": "Courant batterie",
+    "envoiC": "1",
+    "envoiI": "1",
+    "envoiD": "0"
+  },
+  "courant_max_moteur": {
+    "size": 2,
+    "description": "Courant max moteur",
+    "envoiC": "1",
+    "envoiI": "1",
+    "envoiD": "1"
+  },
+  "courant_moteur": {
+    "size": 2,
+    "description": "Courant moteur",
+    "envoiC": "1",
+    "envoiI": "1",
+    "envoiD": "0"
+  },  
+  "capacite_totale_batterie": {
+    "size": 2,
+    "description": "Capacité totale batterie",
+    "envoiC": "1",
+    "envoiI": "1",
+    "envoiD": "0"
+  },  
+  "capacite_dispo_batterie": {
+    "size": 2,
+    "description": "Capacité disponible batterie"
+    "envoiC": "0",
+    "envoiI": "1",
+    "envoiD": "0"
+  },  
+  "capacite_dispo_pourc": {
+    "size": 1,
+    "description": "Capacité disponible %",
+    "envoiC": "1",
+    "envoiI": "1",
+    "envoiD": "0"
+  },
+  "puissance_inst_moteur": {
+    "size": 2,
+    "description": "Puissance instantanée moteur",
+    "envoiC": "1",
+    "envoiI": "1",
+    "envoiD": "0"
+  }, 
+  // Gestion de la course
+  "temps_course_possible": {
+    "size": 2,
+    "description": "Temps de course encore possible",
+    "envoiC": "1",
+    "envoiI": "1",
+    "envoiD": "0"
+  }, 
+  "type_course_ll": {
+    "size": 1,
+    "description": "Type de course LOURD - LEGER",
+    "envoiC": "0",
+    "envoiI": "0",
+    "envoiD": "1"
+  },
+  "type_course_qf": {
+    "size": 1,
+    "description": "Type de course qualif-1/4-1/2-finale",
+    "envoiC": "0",
+    "envoiI": "0",
+    "envoiD": "1"
+  },
+  "vitesse_bateau": {
+    "size": 2,
+    "description": "Vitesse bateau",
+    "envoiC": "1",
+    "envoiI": "1",
+    "envoiD": "0"
+  },  
+  "distance_parc_leger": {
+    "size": 2,
+    "description": "Distance parcours léger",
+    "envoiC": "0",
+    "envoiI": "1",
+    "envoiD": "1"
+  }, 
+  "distance_parc_lourd": {
+    "size": 2,
+    "description": "Distance parcours lourd",
+    "envoiC": "0",
+    "envoiI": "1",
+    "envoiD": "1"
+  },
+  "vitesse_min_calc_temps": {
+    "size": 2,
+    "description": "Vitesse minimale pour calcul du temps",
+    "envoiC": "0",
+    "envoiI": "1",
+    "envoiD": "1"
+  }, 
+  // Gestion du temps  
+  "heure": {
+    "size": 1,
+    "description": "Heure",
+    "envoiC": "1",
+    "envoiI": "0",
+    "envoiD": "0"
+  },   
+  "minute": {
+    "size": 1,
+    "description": "Minute",
+    "envoiC": "1",
+    "envoiI": "0",
+    "envoiD": "0"
+  }, 
+   "seconde": {
+    "size": 1,
+    "description": "Seconde",
+    "envoiC": "1",
+    "envoiI": "0",
+    "envoiD": "0"
+  }, 
+  // Gestion des erreurs 
+   "erreur1": {
+    "size": 1,
+    "description": "Erreur 1",
+    "envoiC": "1",
+    "envoiI": "1",
+    "envoiD": "0"
+  }, 
+   "erreur2": {
+    "size": 1,
+    "description": "Erreur 2",
+    "envoiC": "1",
+    "envoiI": "1",
+    "envoiD": "0"
+  },  
+   "erreur3": {
+    "size": 1,
+    "description": "Erreur 3",
+    "envoiC": "1",
+    "envoiI": "1",
+    "envoiD": "0"
+  }, 
+   "erreur4": {
+    "size": 1,
+    "description": "Erreur 4",
+    "envoiC": "1",
+    "envoiI": "1",
+    "envoiD": "0"
+  },   
+   "erreur5": {
+    "size": 1,
+    "description": "Erreur 5",
+    "envoiC": "1",
+    "envoiI": "1",
+    "envoiD": "0"
+  },  
+  //Gestion de la sécuritée	  
+   "emergency_stop": {
+    "size": 1,
+    "description": "Emergency STOP",
+    "envoiC": "1",
+    "envoiI": "1",
+    "envoiD": "0"
+  }, 
+   "mode_stop_on": {
+    "size": 1,
+    "description": "Mode STOP - ON",
+    "envoiC": "1",
+    "envoiI": "1",
+    "envoiD": "0"
+  },  
+  //Gestion des consignes 
+   "consigne_gouv": {
+    "size": 2,
+    "description": "Consigne gouvernail"
+  }, 
+   "consigne_foils1": {
+    "size": 2,
+    "description": "Consigne foils 1",
+    "envoiC": "0",
+    "envoiI": "0",
+    "envoiD": "1"
+  }, 
+   "consigne_foils2": {
+    "size": 2,
+    "description": "Consigne foils 2",
+    "envoiC": "0",
+    "envoiI": "0",
+    "envoiD": "1"
+  },  
+   "consigne_capt_moteur1": {
+    "size": 3,
+    "description": "Consigne capteur moteur 1",
+    "envoiC": "0",
+    "envoiI": "0",
+    "envoiD": "1"
+  }, 
+   "consigne_capt_moteur2": {
+    "size": 3,
+    "description": "Consigne capteur moteur 2",
+    "envoiC": "0",
+    "envoiI": "0",
+    "envoiD": "1"
+  }, 
+   "consigne_vit_driver_moteur": {
+    "size": 2,
+    "description": "Consigne vitesse driver moteur"
+  }, 
+   "consigne_vit_telecommande": {
+    "size": 2,
+    "description": "Consigne vitesse télécommande"
+  },
+   "mode_man_course_end": {
+    "size": 1,
+    "description": "Mode manuel-course-endurance",
+    "envoiC": "1",
+    "envoiI": "1",
+    "envoiD": "0"
+  },
+   "mode_avant_stop_arr": {
+    "size": 1,
+    "description": "Mode marche avant - stop - arrière",
+    "envoiC": "1",
+    "envoiI": "1",
+    "envoiD": "0"
+  },
+
+  //Etat du bateau
+   "pos_foils1": {
+    "size": 2,
+    "description": "Position foils 1",
+    "envoiC": "0",
+    "envoiI": "1",
+    "envoiD": "0"
+  },
+   "pos_foils2": {
+    "size": 2,
+    "description": "Position foils 2",
+    "envoiC": "0",
+    "envoiI": "1",
+    "envoiD": "0"
+  },
+   "pos_capteur_moteur1": {
+    "size": 3,
+    "description": "Position capteur moteur 1",
+    "envoiC": "0",
+    "envoiI": "1",
+    "envoiD": "0"
+  },
+   "pos_capteur_moteur2": {
+    "size": 3,
+    "description": "Position capteur moteur 2",
+    "envoiC": "0",
+    "envoiI": "1",
+    "envoiD": "0"
+  },
+   "accel_x": {
+    "size": 2,
+    "description": "Accéléromètre X",
+    "envoiC": "1",
+    "envoiI": "1",
+    "envoiD": "0"
+  },
+   "accel_y": {
+    "size": 2,
+    "description": "Accéléromètre Y",
+    "envoiC": "1",
+    "envoiI": "1",
+    "envoiD": "0"
+  },
+   "accel_z": {
+    "size": 2,
+    "description": "Accéléromètre Z",
+    "envoiC": "1",
+    "envoiI": "1",
+    "envoiD": "0"
+  },
+  //Régulation
+   "reg_P_gouvernail": {
+    "size": 2,
+    "description": "Régulateur P gouvernail",
+    "envoiC": "0",
+    "envoiI": "1",
+    "envoiD": "1"
+  },
+   "reg_I_gouvernail": {
+    "size": 2,
+    "description": "Régulateur I gouvernail",
+    "envoiC": "0",
+    "envoiI": "1",
+    "envoiD": "1"
+  },
+   "reg_P_foils1": {
+    "size": 2,
+    "description": "Régulateur P foils 1",
+    "envoiC": "0",
+    "envoiI": "1",
+    "envoiD": "1"
+  },
+   "reg_I_foils1": {
+    "size": 2,
+    "description": "Régulateur I foils 1",
+    "envoiC": "0",
+    "envoiI": "1",
+    "envoiD": "1"
+  },
+   "reg_P_foils2": {
+    "size": 2,
+    "description": "Régulateur P foils 2",
+    "envoiC": "0",
+    "envoiI": "1",
+    "envoiD": "1"
+  },
+   "reg_I_foils2": {
+    "size": 2,
+    "description": "Régulateur I foils 2",
+    "envoiC": "0",
+    "envoiI": "1",
+    "envoiD": "1"
+  },
+   "reg_P_cour_moteur": {
+    "size": 2,
+    "description": "Régulateur P courant moteur",
+    "envoiC": "0",
+    "envoiI": "1",
+    "envoiD": "1"
+  },
+   "reg_I_cour_moteur": {
+    "size": 2,
+    "description": "Régulateur I courant moteur",
+    "envoiC": "0",
+    "envoiI": "1",
+    "envoiD": "1"
+  },
+
+}

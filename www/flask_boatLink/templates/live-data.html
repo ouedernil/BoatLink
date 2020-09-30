@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link rel="stylesheet" href="/static/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/static/css/accordeon.css">
+		<link rel="stylesheet" href="../static/css/style.css">
+		<script src="/static/js/jquery-2.2.4.js"></script>
+		<script src="/static/js/live-data.js"></script>
+		<title>Données Live</title>
+	</head>
+	<body>
+		<div class="grid">
+			<div id="header">
+			</div>
+			<div id="navigation">
+			</div>
+			<div class="row center-block">
+				<div class="center-block">
+					<button class="accordion">Mise en service du bateau</button>
+					<div class="panel mise-en-service-grid">
+					{% block body %}
+					{% if session['logged_in'] %}
+					<div class="text-left">
+						<select id="init_combobox" class="combobox form-control" name="horizontal" required="required"></select>
+					</div>
+					<div class="text-left col-xs-3 padding">
+						<form>
+		  					<input id="param_input" type="text" name="val_param" style="width: 50px;">
+						</form>
+					</div>
+					<div class="text-left col-xs-2 padding">
+						<p id="label_unite"></p>
+					</div>
+					<div class="text-left col-xs-6 padding">
+						<ul>
+						  	<li><a onclick="sendDataToBoat()">Envoyer</a></li>
+						</ul>
+					</div>
+					{% endif %}
+					{% endblock %}
+					<div class="col-xs-12 text-left">
+						<p><b>Temps</b><p>
+						<table id="init_temps">
+						</table>
+						<p><b>Energie</b><p>
+						<table  id="init_energie" >
+						</table>
+						<p><b>Course</b><p>
+						<table id="init_course" >
+						</table>
+						<p><b>Sécuité</b><p>
+						<table id="init_securite" >
+						</table>
+						<p><b>Consigne</b><p>
+						<table id="init_consigne" >
+						</table>
+						<p><b>Bateau</b><p>
+						<table id="init_bateau" >
+						</table>
+						<p><b>Régulation</b><p>
+						<table id="init_regul" >
+						</table>
+						<p><b>Erreurs</b><p>
+						<table id="init_erreur" >
+						</table>
+					</div>
+				</div>
+			</div>
+				<div class="row center-block">
+					<button class="accordion">Informations Live</button>
+					<div class="panel infos-live-grid ">
+						<p><b>Temps</b><p>
+						<table id="live_temps" >
+						</table>
+						<p><b>Energie</b><p>
+						<table id="live_energie" >
+						</table>
+						<p><b>Course</b><p>
+						<table id="live_course" >
+						</table>
+						<p><b>Sécuité</b><p>
+						<table id="live_securite" >
+						</table>
+						<p><b>Consigne</b><p>
+						<table id="live_consigne" >
+						</table>
+						<p><b>Bateau</b><p>
+						<table id="live_bateau" >
+						</table>
+						<p><b>Erreurs</b><p>
+						<table id="live_erreur" >
+						</table>
+					</div>
+				</div>
+			</div>	
+		</div>
+
+	</body>
+	<script>
+		var acc = document.getElementsByClassName("accordion");
+		var i;
+
+		for (i = 0; i < acc.length; i++) {
+		  acc[i].onclick = function() {
+		    this.classList.toggle("active");
+		    var panel = this.nextElementSibling;
+		    if (panel.style.maxHeight){
+		      panel.style.maxHeight = null;
+		    } else {
+		      panel.style.maxHeight = panel.scrollHeight + "px";
+		    } 
+		  }
+		}
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#header').load('/header');
+    			$('#navigation').load('/navigation');
+			startLiveData();
+		});
+	</script>
+</html>
+
+
+

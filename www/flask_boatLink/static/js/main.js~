@@ -1,0 +1,245 @@
+
+var baseURL = "http://localhost:8000";
+var interval = 0;
+var c = 0;
+
+
+
+function getWeatherStation(data){
+	//Get the devices array
+	$.ajax({
+		method: 'GET',
+		url:baseURL,
+		headers: {
+			"Accept" : "application/json",
+			"Content-type": "application/json"
+		},
+
+
+       success:function(data){
+			console.log(data);
+			var selectItemMap = $("#selectMap"), options = '';
+			var select = $("#selectBox"), options = '';
+		    selectItemMap.empty(); 
+		    select.empty();
+  			devices = data.stations;
+ 			
+ 			//check the current file
+		    var htmlFile = location.pathname.substr(location.pathname.lastIndexOf("/")+1);
+		    if (htmlFile == "index.html"){
+		  	    setTimer(function(){updateDisplay(devices[0]);});
+			    changeState(devices[0]);
+			}
+		    if (htmlFile == "carte.html"){
+		    	updateMarker(devices[0]);
+		    }
+
+		    $.each(devices, function(i, value){
+		    	//fill both selectboxes
+			    select.append('<option value="'+i+'">'+ value.location+'</option>'); 
+			    selectItemMap.append('<option value="'+i+'">'+ value.location+'</option>');  
+		 	//check wich item in the selectbox is selected
+			   
+			});  	
+			 $(select).change(function(){
+			    if (htmlFile == "index.html"){
+			    	//erase the datas table
+				    $("#tableData td").remove();
+				    c = 0; 
+				    stopIntervalFunction(interval);
+				    //update datas and check the state of a device
+		      		var selectedStation = $("#selectBox option:selected").val();
+		      		setTimer(function(){updateDisplay(devices[selectedStation]);}); 			
+		 			changeState(devices[selectedStation]);
+		 		}
+			 });  
+			 $(selectItemMap).change(function(){
+			   	//update markers on the map
+	      		var selectedStationMap = $("#selectMap option:selected").val();
+	      		if (htmlFile == "carte.html"){
+	 				updateMarker(devices[selectedStationMap]); 
+	 			}
+			 }); 
+
+	 	},
+	 	error: function (request, status, error) {
+        	console.log("Méthode getWeatherStation, Erreur ="+error);
+         
+       }
+
+	});
+};
+
+
+function updateDisplay(device){
+
+ 		$.ajax({
+		method: 'GET',
+		url:device.url,
+		headers: {
+			"Accept" : "application/json",
+			"Content-type": "application/json"
+		},
+		success:function(data){
+			//display the description and the localation of the selected device
+			$("#selectedStation").text(device.name);
+			$("#stationLocation").text(device.location);
+			var state = '';
+			var actuator = data.actuators;
+			//the toggle is on, set the timer
+			if(actuator.state.value){
+				state = 'on';		 		
+					console.log("interval = "+interval);
+			}else{
+				// otherwise, disable the timer using stopIntervalFunction function
+				state = 'off';
+				stopIntervalFunction(interval);
+			}
+			//set to the toggleButton the station state
+			$("#activateStation").bootstrapToggle(state);
+			updateWeahterStationDatas(data);
+	 	},
+	 	error: function (request, status, error) {
+        	console.log("Méthode updateDisplay, Erreur ="+request.responseText);
+         
+       }
+	});
+
+};
+function setTimer(f){
+	interval = setInterval(f, 3000);
+}
+
+function stopIntervalFunction(myInterval) {
+    clearInterval(myInterval);
+}
+
+function changeState(device){
+	$('#activateStation').change(function() {
+		var state = $("#activateStation").prop('checked');
+		switchWeatherStationState(state, device);	
+	})
+}
+
+function updateWeahterStationDatas(device){
+			console.log("Compteur avant 10 = "+c);
+			var sensor = device.sensors;
+			var actuator = device.actuators;
+			console.log("Datas updated");
+			var temperature = sensor.temperature.current_condition.value.toFixed(1);
+			$("#temperatureValue").text(temperature+" "+sensor.temperature.unit);
+			var pressure = sensor.pressure.current_condition.value.toFixed(1);
+			$("#pressureValue").text(pressure+" "+sensor.pressure.unit);
+			var humidity = sensor.humidity.current_condition.value.toFixed(1);
+			$("#humidityValue").text(humidity+" "+sensor.humidity.unit);
+			var heure = sensor.humidity.current_condition.time;
+			$("#displayTime").text(sensor.humidity.current_condition.date+" à "+heure);
+
+			populateTable(heure,temperature,pressure,humidity);
+};
+
+
+
+
+function populateTable(heure, temperature, pressure, humidity){
+		
+		if(c > 10){
+			$("#tableData td").remove(); 
+			c = 0;
+		}
+		c++;
+		var tableauDonnee = document.getElementById("tableData");
+		var newLine = document.createElement("tr");
+		var cellHeure = document.createElement("td");
+		cellHeure.appendChild(document.createTextNode(heure+" | "));
+		var cellTemp = document.createElement("td");
+		cellTemp.appendChild(document.createTextNode(temperature+"° | "));
+		var cellHumid = document.createElement("td");
+		cellHumid.appendChild(document.createTextNode(pressure+"hPa | "));
+		var cellPres= document.createElement("td");
+		cellPres.appendChild(document.createTextNode(humidity+"% "));
+
+		newLine.appendChild(cellHeure);
+		newLine.appendChild(cellTemp);
+		newLine.appendChild(cellHumid);
+		newLine.appendChild(cellPres);
+		tableauDonnee.appendChild(newLine);
+}
+
+var map;
+var markerOptions;
+var marker;
+var coordinates;
+var mapCanvas;
+var mapOptions;
+
+function initMap() {
+    mapCanvas = document.getElementById("gMap");
+    mapOptions = {
+        center: new google.maps.LatLng(51.5, -0.2),
+        zoom: 10
+    };
+    map = new google.maps.Map(mapCanvas, mapOptions);
+  	coordinates = new google.maps.LatLng(51.5, -0.2);
+  	marker = addMarker(map, coordinates);
+};
+
+function updateMarker(device){
+	coordinates = new google.maps.LatLng(device.latitude, device.longitude);
+	addMarker(map, coordinates);
+
+};
+
+function addMarker(map, coordinates) {
+	marker = new google.maps.Marker({position: coordinates});
+	marker.setMap(map);
+	map.panTo( coordinates);
+  };
+
+
+
+
+function switchWeatherStationState(toggleState, device){
+	 $.ajax({
+		method: 'GET',
+		url:device.url,
+
+		headers: {
+			"Accept" : "application/json",
+			"Content-type": "application/json"
+		},
+		success:function(data){
+				actuator = data.actuators;
+				link = device.url+"/actuators/state/"
+				if(toggleState != actuator.state.value){
+					dataState='{"value":'+toggleState+'}';
+					$.ajax({
+					  	url:link,
+					  	type: 'PUT',
+					  	data:dataState,
+					  	headers: {
+							"Accept" : "application/json",
+							"Content-type": "application/json"
+						},
+					  	success: function(dataState) {
+					  		console.log(device.url);
+					    	console.log("Set value = "+toggleState+" with success");	
+			  			},
+			  			error: function (request, status, error) {
+			  				console.log(device.url);
+        					console.log("Méthode switchWeatherStationState, Erreur ="+request.responseText);
+       					}
+					});	
+				}
+
+			
+	 	},
+	 	error: function (request, status, error) {
+        	console.log("Méthode switchWeatherStationState, Erreur ="+request.responseText);
+       }
+	});
+
+
+}
+
+

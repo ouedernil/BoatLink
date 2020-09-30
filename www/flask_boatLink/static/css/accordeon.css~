@@ -1,0 +1,39 @@
+* {
+
+     box-sizing: border-box;
+}
+
+body {
+    padding: 5%;
+    padding-top: 5%;
+    font-family: 'Lato', sans-serif;
+}
+
+button.accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    width: 100%;
+    border: none;
+    text-align: center;
+    outline: none;
+    transition: 0.4s;
+}
+
+button.accordion.active, button.accordion:hover {
+    background-color: #ddd;
+}
+
+div.panel {
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+.accordion {
+    max-width: 100%;
+}
+.accordion > li {
+    display: flex;
+    vertical-align: top;
+}

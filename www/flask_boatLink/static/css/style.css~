@@ -1,0 +1,67 @@
+* {
+
+     box-sizing: border-box;
+}
+
+body {
+	padding: 5%;
+	padding-top: 5%;
+	font-family: 'Lato', sans-serif;
+}
+
+.btn-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 100px;
+  }
+
+@media (max-width: 768px) {
+  .btn-circle {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 20px;
+  }
+}
+
+.btn_connexion{
+  margin-top: 20px;
+}
+
+.elem_login{
+  margin-top: 20px;
+}
+
+.banner-img{
+  display: block;
+  margin-left: auto;
+  margin-right: auto
+
+}
+
+.value_data {
+  float:right;
+  text-align:right;
+}
+
+.second-button {
+  margin-top:50px;
+}
+
+.input-login {
+  padding-top:20px;
+  padding-bottom:20px;
+}
+
+.padding{
+  padding-top:10px;
+  padding-bottom:10px;
+}
+.desc_combo{
+ margin-top:10px;
+}
+
+#b_live{
+ border-top:100px;
+}
+

@@ -1,0 +1,226 @@
+var json_param_file = "/static/js/parametres.json"
+
+
+//Array for live data
+var live_energieT = ["tension_batterie", "tension_boost", "courant_batterie", "courant_max_moteur", "courant_moteur", "capacite_totale_batterie","capacite_dispo_pourc","puissance_inst_moteur"];
+var live_courseT = ["temps_course_possible", "vitesse_bateau"];
+var live_consigneT = ["mode_man_course_end", "mode_avant_stop_arr"];
+var live_erreurT = ["erreur1", "erreur2","erreur3", "erreur4","erreur5"];
+var live_securiteT = ["emergency_stop", "mode_stop_on"];
+var live_bateauT = ["accel_x", "accel_y", "accel_z"];
+var order_liveT = [live_energieT ,live_courseT, live_securiteT, live_consigneT, live_bateauT, live_erreurT];
+var orderElement_liveT = ["live_energie", "live_course", "live_securite", "live_consigne", "live_bateau", "live_erreur"];
+
+//Array for init data
+var init_energieT = ["tension_batterie", "tension_boost", "courant_batterie", "courant_max_moteur", "courant_moteur", "capacite_totale_batterie", "capacite_dispo_batterie", "capacite_dispo_pourc","puissance_inst_moteur"];
+var init_courseT = ["temps_course_possible", "vitesse_bateau", "distance_parc_leger", "distance_parc_lourd", "vitesse_min_calc_temps"];
+var init_securiteT = ["emergency_stop", "mode_stop_on"];
+var init_consigneT = ["mode_man_course_end", "mode_avant_stop_arr"];
+var init_bateauT = ["pos_foils1", "pos_foils2",  "pos_capteur_moteur1",  "pos_capteur_moteur2", "accel_x", "accel_y", "accel_z"];
+var init_regulT = ["reg_P_gouvernail", "reg_I_gouvernail", "reg_P_foils1", "reg_I_foils1", "reg_P_foils2", "reg_I_foils2", "reg_P_cour_moteur", "reg_I_cour_moteur"];
+var init_erreurT = ["erreur1", "erreur2","erreur3", "erreur4","erreur5"];
+var order_initT = [init_energieT ,init_courseT, init_securiteT, init_consigneT, init_bateauT, init_regulT, init_erreurT];
+
+var orderElement_initT = ["init_energie", "init_course", "init_securite", "init_consigne", "init_bateau", "init_regul", "init_erreur"];
+
+var orderTable = [];
+var interval = 0;
+
+function startLiveData(){
+	init_Live();
+        init_Init();
+	getLiveData();
+	changeUniteInitData();
+}
+
+function getLiveData(data){
+	var sock = null;
+         window.onload = function() {
+
+            var wsuri;
+
+            if (window.location.protocol === "file:") {
+               wsuri = "ws://160.98.31.214:2000";
+            } else {
+               wsuri = "ws://" + window.location.hostname + ":2000";
+            }
+
+            if ("WebSocket" in window) {
+               sock = new WebSocket(wsuri);
+            } else if ("MozWebSocket" in window) {
+               sock = new MozWebSocket(wsuri);
+            } else {
+               console.log("Browser does not support WebSocket!");
+            }
+
+            if (sock) {
+               sock.onopen = function() {
+                  console.log("Connected to " + wsuri);
+               }
+
+               sock.onclose = function(e) {
+                  console.log("Connection closed (wasClean = " + e.wasClean + ", code = " + e.code + ", reason = '" + e.reason + "')");
+                  sock = null;
+               }
+
+               sock.onmessage = function(e) {
+		  data = e.data;
+		  console.log(data.length);
+		  if(data.length < 600){
+                  	populateAccordionLive(data);
+		  }else{
+			populateAccordionInit(data);
+		}	
+               }
+            }
+         };
+
+         function broadcast() {
+            var msg = document.getElementById('message').value;
+            if (sock) {
+               sock.send(msg);
+               console.log("Sent: " + msg);
+            } else {
+               console.log("Not connected.");
+            }
+         };
+
+}
+function populateAccordionLive(data){ 
+	var result = JSON.parse(data);
+	var h = result["heure"];
+	var m = result["minute"];
+	var s = result["seconde"];
+	var temps = h+":"+m+":"+s; 
+	document.getElementById("live_temps_val").innerHTML = temps
+	$.getJSON(json_param_file, function(json) {
+		for(var j = 0; j < order_liveT.length; j++){
+			orderTable = order_liveT[j];
+			for(var i = 0; i < orderTable.length; i++){
+				var key = orderTable[i];
+				document.getElementById(key+"_live_val").innerHTML = result[key]+" "+json[key].unite;
+			}	
+
+		}	
+	});	
+}
+
+function populateAccordionInit(data){ 
+	var result = JSON.parse(data);
+	var h = result["heure"];
+	var m = result["minute"];
+	var s = result["seconde"];
+	var temps = h+":"+m+":"+s; 
+	document.getElementById("init_temps_val").innerHTML = temps
+	$.getJSON(json_param_file, function(json) {
+		for(var j = 0; j < order_initT.length; j++){
+			orderTable = order_initT[j];
+			for(var i = 0; i < orderTable.length; i++){
+				var key = orderTable[i];
+				var select = document.getElementById("init_combobox");
+				$(select).append('<option value="'+key+'">'+json[key].description+'</option');
+				document.getElementById(key+"_init_val").innerHTML = result[key]+" "+json[key].unite;
+			}	
+
+		}	
+	});	
+}
+
+function init_Live(){ 
+	var tableauDonnee = document.getElementById("live_temps"); 	
+	var newLine = document.createElement("tr");;
+	var cell_val = document.createElement("td");
+	cell_val.id ="live_temps_val";
+	cell_val.appendChild(document.createTextNode(""));	
+	newLine.appendChild(cell_val);
+	tableauDonnee.appendChild(newLine);
+	$.getJSON(json_param_file, function(json) {
+		for(var j = 0; j < order_liveT.length; j++){
+			orderTable = order_liveT[j];
+			for(var i = 0; i < orderTable.length; i++){
+				var key = orderTable[i];
+				current_table = orderElement_liveT[j];
+			    	tableauDonnee = document.getElementById(current_table);
+				var newLine = document.createElement("tr");
+				var cell_desc = document.createElement("td");
+				var cell_val = document.createElement("td");
+				cell_desc.style.width = '150px';
+				cell_val.style.width = '150px';
+				cell_desc.appendChild(document.createTextNode(json[key].description));
+				cell_val.appendChild(document.createTextNode(""));
+				cell_val.style.textAlign = "right";
+				cell_val.id = key+"_live_val";
+				newLine.appendChild(cell_desc);
+				newLine.appendChild(cell_val);
+				newLine.style.borderBottom = "thin solid #333";
+				if(j >= order_liveT[j].lentgth - 1){
+					newLine.style.paddingBottom = "5px";
+				}
+					tableauDonnee.appendChild(newLine);
+				}	
+
+		}	
+	});	
+}
+
+
+function init_Init(){ 
+var tableauDonnee = document.getElementById("init_temps"); 	
+	var newLine = document.createElement("tr");;
+	var cell_val = document.createElement("td");
+	cell_val.id ="init_temps_val";
+	cell_val.appendChild(document.createTextNode(""));	
+	newLine.appendChild(cell_val);
+	tableauDonnee.appendChild(newLine);
+	$.getJSON(json_param_file, function(json) {
+		for(var j = 0; j < order_initT.length; j++){
+			orderTable = order_initT[j];
+			for(var i = 0; i < orderTable.length; i++){
+				var key = orderTable[i];
+				current_table = orderElement_initT[j];
+			    	tableauDonnee = document.getElementById(current_table);
+				var newLine = document.createElement("tr");
+				var cell_desc = document.createElement("td");
+				var cell_val = document.createElement("td");
+				cell_desc.style.width = '150px';
+				cell_val.style.width = '150px';
+				cell_desc.appendChild(document.createTextNode(json[key].description));
+				cell_val.appendChild(document.createTextNode(""));
+				cell_val.style.textAlign = "right";
+				cell_val.id = key+"_init_val";
+				newLine.appendChild(cell_desc);
+				newLine.appendChild(cell_val);
+				newLine.style.borderBottom = "thin solid #333";
+				if(j >= order_initT[j].lentgth - 1){
+					newLine.style.paddingBottom = "5px";
+				}
+					tableauDonnee.appendChild(newLine);
+				}	
+
+		}	
+	});	
+	
+	
+}
+
+
+function changeUniteInitData(){
+	var select = document.getElementById("init_combobox");
+	$(select).on('change', function(){
+		$.getJSON(json_param_file, function(json) {
+		var label_unite = document.getElementById("label_unite");
+		label_unite.innerHTML = json[select.value].unite;	
+		});
+	});
+}
+
+function sendDataToBoat(){
+            var msg = document.getElementById('param_input').value;
+            if (sock) {
+               sock.send(msg);
+               console.log("Sent: " + msg);
+            } else {
+               console.log("Not connected.");
+            }
+}
+

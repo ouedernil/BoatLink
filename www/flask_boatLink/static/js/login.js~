@@ -1,0 +1,43 @@
+var baseURL = "http://192.168.43.78:5000";;
+
+
+function tryLogout(){
+	 $.ajax({
+		method: 'POST',
+		url:device.url,
+		headers: {
+			"Accept" : "application/json",
+			"Content-type": "application/json"
+		},
+		success:function(data){
+			if(data!="NOK"){
+				actuator = data.actuators;
+				link = device.url+"/actuators/state/"
+				if(toggleState != actuator.state.value){
+					dataState='{"value":'+toggleState+'}';
+					$.ajax({
+					  	url:link,
+					  	type: 'PUT',
+					  	data:dataState,
+					  	headers: {
+							"Accept" : "application/json",
+							"Content-type": "application/json"
+						},
+					  	success: function(dataState) {
+					    	console.log("Set value = "+toggleState+" with success");	
+					    	updateDisplay(device);
+			  			},
+			  			error: function (request, status, error) {
+        					console.log("Méthode switchWeatherStationState, Erreur ="+request.responseText);
+				}
+       					}
+					});	
+				}
+			
+	 	},
+	 	error: function (request, status, error) {
+        	console.log("Méthode switchWeatherStationState, Erreur ="+request.responseText);
+       }
+	});
+
+}

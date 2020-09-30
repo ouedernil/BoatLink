@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="../static/css/bootstrap.min.css">
+		<link rel="stylesheet" href="../static/css/style.css">
+		<script src="/static/js/jquery-2.2.4.js"></script>
+  		<title> BoatLink </title>
+	</head>
+	<body>
+		<div class="grid">
+			<div id="navigation">
+			</div>
+			<div class="row">
+				<div class="col-xs-12 center-block text-center">	
+					<a href="live-data"><img alt="cruise-btn"src="/static/images/cruise-btn.png"/></a>
+			</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 center-block text-center second-button">
+					<a href="statistiques"><img href="statistiques" alt="graph-btn" src="/static/images/graph-btn.png"/></a>
+				</div>
+			</div>
+
+	</body>
+	<script type="text/javascript">
+		$(document).ready(function() {
+    			//$('#navigation').load('/header');
+		});
+	</script>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link rel="stylesheet" href="/static/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/static/css/style.css">
+		<link rel="stylesheet" href="/static/css/index.css">
+		<link rel="stylesheet" href="/static/css/admin_settings.css">
+		<script src="/static/js/jquery-2.2.4.js"></script>
+		<script src="/static/js/.admin.js"></script>
+  		<title> Parameters page </title>
+	</head>
+	<body>
+		{% block body %}
+		<div id="header"></div>
+		<div id="navigation"></div>
+		{% if session['logged_in'] %}
+		<div class="grid">
+			<div class="row text-center">
+				<div class="panel infos-live-grid">
+					<table id="table_admin" class="col-xs-12">
+	 					<tr>
+   							<th><p>Liste des administrateurs</p></th>
+  						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="row center-block">
+				<ul class="center-block">
+				  <li class="col-xs-4" ><a id="add_admin" onclick="addAdmin()">Ajouter</a></li>
+				  <li class="col-xs-4"><a href="/statistiques">Modifier</a></li>
+				  <li class="col-xs-4"><a href="/statistiques">Supprimer</a></li>
+				</ul>
+
+			</div>
+		</div>
+		
+		<script type="text/javascript">
+			$(document).ready(function() {
+				startAdminData();</script>
+			});
+		{% else %}
+		<script type="text/javascript">
+			alert("Vous devez être administrateur pour afficher cette page");
+		</script>
+		{% endif %}
+		{% endblock %}
+	</body>
+	<script type="text/javascript">
+		$(document).ready(function() {
+    			$('#header').load('/header');
+			$('#navigation').load('/navigation');
+		});
+	</script>
+</html>
+
+
+
+

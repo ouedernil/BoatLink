@@ -1,0 +1,36 @@
+* {
+
+     box-sizing: border-box;
+}
+
+body {
+	padding: 5%;
+	padding-top: 5%;
+	font-family: 'Lato', sans-serif;
+}
+
+h1{ margin: 0; }
+#add_admin { 
+  -webkit-user-select: none; /* Chrome/Safari */        
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */ 
+}
+
+#add_admin:hover { background: #666; }
+#add_admin:active { background: #444; }
+
+#add_admin_form { 
+  display: none;
+  transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%)
+  
+}
+
+input, textarea { 
+  display: block; 
+}
+textarea { height: 80px; resize: none; }
+
+.formBtn { 
+  display: inline-block;
+}

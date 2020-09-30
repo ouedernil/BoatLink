@@ -1,0 +1,48 @@
+* {
+
+     box-sizing: border-box;
+}
+
+body {
+    padding: 5%;
+    padding-top: 5%;
+    font-family: 'Lato', sans-serif;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #39639C;
+    margin-bottom: 5px;
+}
+
+li {
+    text-align: center;
+}
+
+li a {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 5px 5px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #111;
+}
+
+.admin_button{
+    list-style-type: none;
+    overflow: hidden;
+    background-color: #39639C;
+    margin-bottom: 5px;
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 5px 5px;
+    text-decoration: none;
+    text-align: center;
+}

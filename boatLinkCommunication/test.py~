@@ -1,0 +1,132 @@
+###############################################################################
+#
+# The MIT License (MIT)
+#
+# Copyright (c) Crossbar.io Technologies GmbH
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
+#
+###############################################################################
+
+import sys
+
+from twisted.internet import reactor
+from twisted.python import log
+from twisted.web.server import Site
+from twisted.web.static import File
+import queue
+import json
+
+from autobahn.twisted.websocket import WebSocketServerFactory, \
+    WebSocketServerProtocol, \
+    listenWS
+
+
+class BroadcastServerProtocol(WebSocketServerProtocol):
+
+    def onOpen(self):
+        self.factory.register(self)
+
+    def onMessage(self, payload, isBinary):
+        if not isBinary:
+            msg = "{} from {}".format(payload.decode('utf8'), self.peer)
+            self.factory.broadcast(msg)
+
+    def connectionLost(self, reason):
+        WebSocketServerProtocol.connectionLost(self, reason)
+        self.factory.unregister(self)
+
+
+class BroadcastServerFactory(WebSocketServerFactory):
+
+    """
+    Simple broadcast server broadcasting any message it receives to all
+    currently connected clients.
+    """
+
+    def __init__(self, url):
+        WebSocketServerFactory.__init__(self, url)
+        self.clients = []
+        self.q = queue.Queue()
+
+
+    def setLiveData(self):
+        while(True):
+            if not self.q.empty():
+                data = self.q.get()
+                print(data)
+                self.broadcast(data)
+                reactor.callLater(1, self.setLiveData)
+
+    def setQueue(self, q):
+        self.q = q
+        self.setLiveData()
+
+    def register(self, client):
+        if client not in self.clients:
+            print("registered client {}".format(client.peer))
+            self.clients.append(client)
+
+    def unregister(self, client):
+        if client in self.clients:
+            print("unregistered client {}".format(client.peer))
+            self.clients.remove(client)
+
+    def broadcast(self, msg):
+        for c in self.clients:
+            c.sendMessage(json.dumps(msg).encode('utf8'))
+
+
+class BroadcastPreparedServerFactory(BroadcastServerFactory):
+
+    """
+    Functionally same as above, but optimized broadcast using
+    prepareMessage and sendPreparedMessage.
+    """
+
+    def broadcast(self, msg):
+        print("broadcasting prepared message '{}' ..".format(msg))
+        preparedMsg = self.prepareMessage(msg)
+        for c in self.clients:
+            c.sendPreparedMessage(preparedMsg)
+            print("prepared message sent to {}".format(c.peer))
+
+
+if __name__ == '__main__':
+    q = queue.Queue() 
+    d = {'tension_batterie':'4','tension_boost':'7','courant_batterie':'3','courant_max_moteur':'1','courant_moteur':'3','capacite_totale_batterie':'5','capacite_dispo_pourc':'33','temps_course_possible':'12','vitesse_bateau':'66','heure':'2', 'minute':'3','seconde':'1','erreur1':'5','erreur2':'3','erreur3':
+'2','erreur4':'4','erreur5':'1','mode_man_course_end':'7','mode_avant_stop_arr':'33','emergency_stop':'21','mode_stop_on':'11', 'accel_x':'32','accel_y':'88','accel_z':'22'}
+    q.put(q)
+  
+
+    log.startLogging(sys.stdout)
+
+    ServerFactory = BroadcastServerFactory
+    # ServerFactory = BroadcastPreparedServerFactory
+
+    factory = ServerFactory(u"ws://127.0.0.1:9000")
+    factory.protocol = BroadcastServerProtocol
+    factory.setQueue(q)
+    listenWS(factory)
+
+    webdir = File(".")
+    web = Site(webdir)
+    reactor.listenTCP(8080, web)
+
+    reactor.run()

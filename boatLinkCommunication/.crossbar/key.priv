@@ -1,0 +1,7 @@
+Crossbar.io private key for node authentication - KEEP THIS SAFE!
+
+creator: leila@ubuntu
+created-at: 2017-05-03T07:54:54.617Z
+machine-id: 9e0b4edd8ebc4b55879f51b2b004d887
+public-key-ed25519: b4bd88cb69fcc628972416425f43642bb687bc581c19762bb68d2db6f72ddb90
+private-key-ed25519: cd69ce1239241437ae1c4c306773f95672cf6b202d021c23dcee4ab8d78336cd
